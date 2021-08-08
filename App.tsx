@@ -2,10 +2,10 @@ import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import styled, { ThemeProvider } from 'styled-components/native';
 import theme from './styles/theme';
-// import api from './services/api/index'
 import HttpClient from './services/api/HttpClient';
 import { CompanyQuote } from './services/api/types';
 import { StocksProvider } from './core/hooks/useStocks';
+import Home from './src/views/Home';
 
 const Container = styled.View`
   flex: 1;
@@ -34,11 +34,8 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <StocksProvider>
-        <Container>
-          <Heading>Open up App.tsx to start working on your app!</Heading>
-          <Heading>{JSON.stringify(data)}</Heading>
-          <StatusBar style="auto" />
-        </Container>
+        <Home />
+        <StatusBar style="auto" />
       </StocksProvider>
     </ThemeProvider>
   );

@@ -1,3 +1,3 @@
-export const SUCCESS = '#79c300';
+export const SUCCESS = 'success';
 
-export const ERROR = '#d64b45';
+export const ERROR = 'error';
