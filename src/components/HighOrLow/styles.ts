@@ -11,10 +11,14 @@ export const HighOrLowContainer = styled.View`
 export const ChangesInfos = styled.View`
   display: flex;
   align-items: center;
+  flex-direction: row;
 `;
 
 export const ChangesHeading3 = styled.Text`
   margin: 0;
+  font-size: x-large;
+  padding-left: 8px;
+  font-weight: 600;
 `;
 
 export const HighOrLowDisplay = styled.Text<HighOrLowDisplayProps>`
@@ -23,4 +27,7 @@ export const HighOrLowDisplay = styled.Text<HighOrLowDisplayProps>`
       ? props.theme.colors.success.main
       : props.theme.colors.error.main};
   margin: 0;
+  font-size: large;
+  padding-left: 8px;
+  font-weight: 600;
 `;

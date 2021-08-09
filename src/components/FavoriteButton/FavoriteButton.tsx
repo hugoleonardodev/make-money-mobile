@@ -1,11 +1,9 @@
 import React from 'react';
-
-import IsFavorite from '../../../assets/icons/is-favorite-icon.svg';
-import Favorite from '../../../assets/icons/favorite-icon.svg';
+import { FAVORITE, IS_FAVORITE } from '../../../common/assets/ICONS';
 
 import { useStocks } from '../../../core/hooks/useStocks';
 import getLocalStorage from '../../../services/store/getLocalStorage';
-import { FavoriteBtn } from './styles';
+import { FavoriteBtn, FavoriteBtnIcon } from './styles';
 
 interface FavoriteButtonProps {
   hasValue: string;
@@ -44,12 +42,13 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({ hasValue }) => {
   return (
     <>
       <FavoriteBtn
-        title=""
         isFavorite={isFavorite}
         onPress={() => handleFavorite(hasValue)}
         disabled={isFavorite}
       >
-        {isFavorite ? <IsFavorite /> : <Favorite />}
+        <FavoriteBtnIcon
+          source={{ uri: isFavorite ? IS_FAVORITE : FAVORITE }}
+        />
       </FavoriteBtn>
     </>
   );

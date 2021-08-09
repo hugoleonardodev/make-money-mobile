@@ -1,8 +1,8 @@
 import React from 'react';
-import High from '../../../assets/icons/high-icon.svg';
-import Low from '../../../assets/icons/low-icon.svg';
+import { Image } from 'react-native';
 
-import { ERROR, SUCCESS } from '../../../common/constants/THEME';
+import { HIGH, LOW } from '../../../common/assets/ICONS';
+
 import {
   ChangesHeading3,
   ChangesInfos,
@@ -25,7 +25,17 @@ const HighOrLow: React.FC<HighOrLowProps> = ({
     <HighOrLowContainer>
       <ChangesInfos>
         <ChangesHeading3>
-          {changePercent > 0 ? <High /> : <Low />}
+          {changePercent > 0 ? (
+            <Image
+              source={{ uri: HIGH }}
+              style={{ width: '24px', height: '12px' }}
+            />
+          ) : (
+            <Image
+              source={{ uri: LOW }}
+              style={{ width: '24px', height: '12px' }}
+            />
+          )}
         </ChangesHeading3>
         <ChangesHeading3>{`$${latestPrice}`}</ChangesHeading3>
       </ChangesInfos>

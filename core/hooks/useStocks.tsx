@@ -26,9 +26,7 @@ export interface StocksContextData {
   isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
   symbol: string;
-  handleInputSymbol: React.ChangeEventHandler<
-    HTMLTextAreaElement | HTMLInputElement
-  >;
+  handleInputSymbol: (text: string) => void;
   handleSearch: (searchSymbol: string) => Promise<void>;
   refreshStock: boolean;
   refreshRecents: boolean;
@@ -73,8 +71,8 @@ export const StocksProvider: React.FC = ({ children }) => {
   }, []);
 
   const handleInputSymbol = React.useCallback(
-    (event) => {
-      setSymbol(event.target.value.toUpperCase());
+    (text) => {
+      setSymbol(text.toUpperCase());
     },
     [setSymbol]
   );

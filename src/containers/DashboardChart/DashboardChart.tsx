@@ -1,58 +1,68 @@
 import React from 'react';
-import { View } from 'react-native';
+
 import {
   Chart,
-  Line,
   Area,
   HorizontalAxis,
   VerticalAxis,
 } from 'react-native-responsive-linechart';
 
+import parseData from '../../../common/helpers';
+import { useStocks } from '../../../core/hooks/useStocks';
+import { useWindowSize } from '../../../core/hooks/useWindowSize';
+import LoadingChart from '../../components/LoadingChart';
+import { DashboardChartContainer } from './styles';
+
 const DashboardChart = () => {
+  const [width, height] = useWindowSize();
+  const { stock, isMarketOpen, isLoading } = useStocks();
+  const { intradayPrice, currentPrice } = stock;
+  const chartParsedData = parseData(intradayPrice, isMarketOpen);
+
   return (
-    <View>
-      <Chart
-        style={{ height: 200, width: 400 }}
-        data={[
-          { x: -2, y: 15 },
-          { x: -1, y: 10 },
-          { x: 0, y: 12 },
-          { x: 1, y: 7 },
-          { x: 2, y: 6 },
-          { x: 3, y: 8 },
-          { x: 4, y: 10 },
-          { x: 5, y: 8 },
-          { x: 6, y: 12 },
-          { x: 7, y: 14 },
-          { x: 8, y: 12 },
-          { x: 9, y: 13.5 },
-          { x: 10, y: 18 },
-        ]}
-        padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
-        xDomain={{ min: -2, max: 10 }}
-        yDomain={{ min: 0, max: 20 }}
-      >
-        <VerticalAxis
-          tickCount={11}
-          theme={{ labels: { formatter: (v) => v.toFixed(2) } }}
-        />
-        <HorizontalAxis tickCount={5} />
-        <Area
-          theme={{
-            gradient: {
-              from: { color: '#ffa502' },
-              to: { color: '#ffa502', opacity: 0.4 },
-            },
+    <DashboardChartContainer>
+      {isLoading ? (
+        <LoadingChart />
+      ) : (
+        <Chart
+          style={{ height: height - 380, width: width }}
+          data={chartParsedData}
+          padding={{ left: 40, bottom: 20, right: 20, top: 20 }}
+          xDomain={{
+            min: chartParsedData[0].x,
+            max: chartParsedData[chartParsedData.length - 1].x,
           }}
-        />
-        <Line
-          theme={{
-            stroke: { color: '#ffa502', width: 5 },
-            scatter: { default: { width: 4, height: 4, rx: 2 } },
+          yDomain={{
+            min:
+              currentPrice.close *
+              (1 -
+                (currentPrice.changePercent < 0
+                  ? -currentPrice.changePercent
+                  : currentPrice.changePercent)),
+            max:
+              currentPrice.close *
+              (1 +
+                (currentPrice.changePercent < 0
+                  ? -currentPrice.changePercent
+                  : currentPrice.changePercent)),
           }}
-        />
-      </Chart>
-    </View>
+        >
+          <VerticalAxis
+            tickCount={11}
+            theme={{ labels: { formatter: (v) => v.toFixed(3) } }}
+          />
+          <HorizontalAxis tickCount={12} />
+          <Area
+            theme={{
+              gradient: {
+                from: { color: '#0047bb' },
+                to: { color: '#fafafa', opacity: 0.1 },
+              },
+            }}
+          />
+        </Chart>
+      )}
+    </DashboardChartContainer>
   );
 };
 

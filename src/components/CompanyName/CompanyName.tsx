@@ -12,6 +12,7 @@ const CompanyName: React.FC<CompanyNameProps> = ({
 }) => {
   const nameArray = companyName.split(' ');
   const fixedName = `${nameArray[0]} ${nameArray[1]}`;
+
   return (
     <CompanyNamesContainer>
       <Heading3>{companySymbol}</Heading3>

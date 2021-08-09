@@ -4,6 +4,7 @@ export interface StorageCompanies {
   name: string;
   symbol: string;
   rating: number;
+  logo: string;
 }
 export interface StorageObject {
   recentCompanies: StorageCompanies[];

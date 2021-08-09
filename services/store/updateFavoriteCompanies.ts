@@ -1,6 +1,4 @@
-// import { CompanyQuote } from '../../core/hooks/useStocks';
 import getLocalStorage from './getLocalStorage';
-// import { StorageCompanies } from './setLocalStorage';
 
 const updateFavoriteCompanies = (
   companyName: string,
@@ -8,11 +6,8 @@ const updateFavoriteCompanies = (
   companyRating: number
 ): boolean | void => {
   const store = getLocalStorage();
-  // console.log(store);
   const isFavorite = store.favoriteCompanies.filter(
-    (company) =>
-      // company.name.startsWith(companyName) ||
-      company.symbol === companySymbol
+    (company) => company.symbol === companySymbol
   );
 
   if (isFavorite.length > 0) return false;

@@ -1,10 +1,13 @@
 import React from 'react';
 
-import HighIcon from '../../../assets/icons/high-icon.svg';
-import LowIcon from '../../../assets/icons/low-icon.svg';
+import {
+  CompanyRatingContainer,
+  CompanyRatingIcons,
+  HeadingRating,
+} from './styles';
 
+import { HIGH, LOW } from '../../../common/assets/ICONS';
 import { ERROR, SUCCESS } from '../../../common/constants/THEME';
-import { CompanyRatingContainer, HeadingRating } from './styles';
 
 interface CompanyRatingProps {
   companyRating: number;
@@ -18,9 +21,9 @@ const CompanyRating: React.FC<CompanyRatingProps> = ({ companyRating }) => {
         {`${companyRating.toFixed(3)}%`}
       </HeadingRating>
       {companyRating > 0 ? (
-        <HighIcon style={{ marginLeft: '4px' }} />
+        <CompanyRatingIcons source={{ uri: HIGH }} />
       ) : (
-        <LowIcon style={{ marginLeft: '4px' }} />
+        <CompanyRatingIcons source={{ uri: LOW }} />
       )}
     </CompanyRatingContainer>
   );
